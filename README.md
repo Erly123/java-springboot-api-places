@@ -40,11 +40,10 @@ O projeto foi desenvolvido virtualmente em tempo real.
 ```
 - Executar:
 ```
-java -jar place-service-api/target/place-service-0.0.1-SNAPSHOT.jar
+java -jar place-service-api/target/place-service-api-0.0.1-SNAPSHOT.jar
 ```
 
 A API poderá ser acessada em [localhost:8080](http://localhost:8080).
-O Swagger poderá ser visualizado em [localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 
 ### Usando Docker
 
@@ -59,79 +58,50 @@ O Swagger poderá ser visualizado em [localhost:8080/swagger-ui.html](http://loc
 ```
 - Executar o container:
 ```
-docker run --name place-service -p 8080:8080  -d place-service:0.0.1-SNAPSHOT
+docker run --name place-service-api -p 8080:8080  -d place-service-api:0.0.1-SNAPSHOT
 ```
 
 A API poderá ser acessada em [localhost:8080](http://localhost:8080).
-O Swagger poderá ser visualizado em [localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 
 ## API Endpoints
 
-Para fazer as requisições HTTP abaixo, foi utilizada a ferramenta [httpie](https://httpie.io):
+Para fazer as requisições HTTP abaixo, foi utilizada a ferramenta [postman](https://www.postman.com/):
 
 - POST /places
 ```
-http POST :8080/places name="Place" state="State"
+http POST :8080/places 
+{
+  "name": "Lago Titica",
+  "state": "Puno"
+}
 
-HTTP/1.1 200 OK
-Content-Length: 129
+Status 201 created
+Content-Length: 146
 Content-Type: application/json
 
 {
-    "createdAt": "2023-04-20T19:00:07.241632",
-    "name": "Place",
-    "slug": "place",
-    "state": "State",
-    "updatedAt": "2023-04-20T19:00:07.241632"
+    "name":"Lago Titica",
+    "slug":"lago-titica",
+    "state":"Puno",
+    "createdAt":"2025-10-31T20:31:25.973563337",
+    "updatedAt":"2025-10-31T20:31:25.973563337"
 }
 ```
 
 - GET /places/{id}
 ```
 http :8080/places/1
-HTTP/1.1 200 OK
-Content-Length: 129
-Content-Type: application/json
 
-{
-    "createdAt": "2023-06-07T14:45:39.693689",
-    "name": "Place",
-    "slug": "place",
-    "state": "State",
-    "updatedAt": "2023-06-07T14:45:39.693689"
-} 
 ```
 
 - GET /places?name=?
 ```
 http :8080/places name==PLACE
-HTTP/1.1 200 OK
-Content-Type: application/json
-transfer-encoding: chunked
 
-[
-    {
-        "createdAt": "2023-06-07T14:45:39.693689",
-        "name": "Place",
-        "slug": "place",
-        "state": "State",
-        "updatedAt": "2023-06-07T14:45:39.693689"
-    }
-]
 ```
 
 - PATCH /places/{id}
 ```
 http PATCH :8080/places/1 name='New Name' state='New State'
-HTTP/1.1 200 OK
-Content-Length: 142
-Content-Type: application/json
 
-{
-    "createdAt": "2023-06-07T14:45:39.693689",
-    "name": "New Name",
-    "slug": "new-name",
-    "state": "New State",
-    "updatedAt": "2023-06-07T14:53:21.671129345"
-}
 ```
