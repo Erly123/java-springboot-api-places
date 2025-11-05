@@ -9,7 +9,7 @@ import com.br.choqquelayme.place_service_api.domain.PlaceService;
 
 @Configuration
 @EnableR2dbcAuditing
-public class PlaceConfig {
+public class PlaceServiceConfig {
 
     @Bean
     PlaceService placeService(PlaceRepository placeRepository) {
