@@ -13,10 +13,16 @@ public class PlaceService {
     this.placeRepository = placeRepository;
     this.slg = Slugify.builder().build();
    }
-
    public Mono<Place> create(PlaceRequest placeRequest) {
       var place= new Place(null, placeRequest.name(), slg.slugify(placeRequest.name()),placeRequest.state()
                         ,null, null);
       return placeRepository.save(place);
    }
+   public Mono<Place> edit(Long id, PlaceRequest placeRequest) {
+      return placeRepository.findById(id)
+              .map(place -> PlaceMapper.updatePlaceFromDTO(placeRequest, place))
+              .map(place -> place.withSlug(slg.slugify(placeRequest.name())))
+              .flatMap(placeRepository::save);
+   }
+
 }
