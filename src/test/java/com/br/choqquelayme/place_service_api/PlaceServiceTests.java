@@ -55,9 +55,9 @@ class PlaceServiceTests {
     @Test
     public void testEditPlaceSuccess() {
 
-        var newName = "New Name";
-        var newState = "New State";
-        var newSlug = "new-name";
+        final String newName = "New Name";
+        final String newState = "New State";
+        final String newSlug = "new-name";
 
         webTestClient
                 .patch()
@@ -72,7 +72,47 @@ class PlaceServiceTests {
                 .jsonPath("slug").isEqualTo(newSlug)
                 .jsonPath("createdAt").isNotEmpty()
                 .jsonPath("updatedAt").isNotEmpty();
+        webTestClient
+                .patch()
+                .uri("/places/1")
+                .bodyValue(
+                        new PlaceRequest(CENTRAL_PERK.name(), null))
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("name").isEqualTo(CENTRAL_PERK.name())
+                .jsonPath("state").isEqualTo(newState)
+                .jsonPath("slug").isEqualTo(CENTRAL_PERK.slug())
+                .jsonPath("createdAt").isNotEmpty()
+                .jsonPath("updatedAt").isNotEmpty();
+        webTestClient
+                .patch()
+                .uri("/places/1")
+                .bodyValue(
+                        new PlaceRequest(null, CENTRAL_PERK.state()))
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("name").isEqualTo(CENTRAL_PERK.name())
+                .jsonPath("state").isEqualTo(CENTRAL_PERK.state())
+                .jsonPath("slug").isEqualTo(CENTRAL_PERK.slug())
+                .jsonPath("createdAt").isNotEmpty()
+                .jsonPath("updatedAt").isNotEmpty();
 
+    }
+    @Test
+    public void testGetSuccess() {
+        webTestClient
+                .get()
+                .uri("/places/1")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("name").isEqualTo(CENTRAL_PERK.name())
+                .jsonPath("state").isEqualTo(CENTRAL_PERK.state())
+                .jsonPath("slug").isEqualTo(CENTRAL_PERK.slug())
+                .jsonPath("createdAt").isNotEmpty()
+                .jsonPath("updatedAt").isNotEmpty();
     }
 
 }

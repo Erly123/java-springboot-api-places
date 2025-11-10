@@ -1,6 +1,7 @@
 package com.br.choqquelayme.place_service_api.web;
 
 import com.br.choqquelayme.place_service_api.domain.PlaceMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.br.choqquelayme.place_service_api.api.PlaceRequest;
@@ -18,11 +19,9 @@ import org.springframework.http.ResponseEntity;
 @RequestMapping("/places")
 public class PlaceController {
 
+    @Autowired
     private PlaceService placeService;
 
-    public PlaceController(PlaceService placeService) {
-        this.placeService = placeService;
-    }
 
     @PostMapping
     public ResponseEntity<Mono<PlaceResponse>> create(@Valid @RequestBody PlaceRequest request  ) {
@@ -32,6 +31,12 @@ public class PlaceController {
     @PatchMapping("{id}")
     public Mono<PlaceResponse> edit(@PathVariable("id") Long id,@RequestBody PlaceRequest request  ) {
         return placeService.edit(id, request).map(PlaceMapper::toResponse);
+    }
+    @GetMapping("{id}")
+    public Mono<ResponseEntity<PlaceResponse>> get(@PathVariable("id") Long id) {
+        return placeService.get(id)
+                .map(place -> ResponseEntity.ok(PlaceMapper.toResponse(place)))
+                .defaultIfEmpty(ResponseEntity.notFound().build());
     }
     
 
