@@ -114,5 +114,13 @@ class PlaceServiceTests {
                 .jsonPath("createdAt").isNotEmpty()
                 .jsonPath("updatedAt").isNotEmpty();
     }
+    @Test
+    public void testGetFailure() {
+        webTestClient
+                .get()
+                .uri("/places/11")
+                .exchange()
+                .expectStatus().isNotFound();
+    }
 
 }
