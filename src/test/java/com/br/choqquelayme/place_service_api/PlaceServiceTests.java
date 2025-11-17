@@ -2,6 +2,8 @@ package com.br.choqquelayme.place_service_api;
 
 import com.br.choqquelayme.place_service_api.api.PlaceRequest;
 import com.br.choqquelayme.place_service_api.domain.Place;
+import com.br.choqquelayme.place_service_api.domain.PlaceRepository;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,6 +19,9 @@ class PlaceServiceTests {
 
 	@Autowired
 	WebTestClient webTestClient;
+
+    @Autowired
+        PlaceRepository placeRepository;
 
 
 	@Test
@@ -121,6 +126,22 @@ class PlaceServiceTests {
                 .uri("/places/11")
                 .exchange()
                 .expectStatus().isNotFound();
+    }
+
+    @Test
+    public void testListAllSuccess() {
+        webTestClient
+                .get()
+                .uri("/places")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("$").isArray()
+                .jsonPath("$[0].name").isEqualTo(CENTRAL_PERK.name())
+                .jsonPath("$[0].slug").isEqualTo(CENTRAL_PERK.slug())
+                .jsonPath("$[0].state").isEqualTo(CENTRAL_PERK.state())
+                .jsonPath("$[0].createdAt").isNotEmpty()
+                .jsonPath("$[0].updatedAt").isNotEmpty();
     }
 
 }
