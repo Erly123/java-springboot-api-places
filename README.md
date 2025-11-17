@@ -69,7 +69,7 @@ Para fazer as requisições HTTP abaixo, foi utilizada a ferramenta [postman](ht
 
 - POST /places
 ```
-http POST :8080/places 
+http://localhost:8080/places
 {
   "name": "Lago Titica",
   "state": "Puno"
@@ -90,7 +90,19 @@ Content-Type: application/json
 
 - GET /places/{id}
 ```
-http :8080/places/1
+http://localhost:8080/places/1
+
+Status 200 Ok
+Content-Type: application/json
+Content-Length: 134
+
+{
+    "name": "Lago Tit",
+    "slug": "lago-tit",
+    "state": "Puno",
+    "createdAt": "2025-11-17T16:54:58.004707",
+    "updatedAt": "2025-11-17T16:54:58.004707"
+}
 
 ```
 

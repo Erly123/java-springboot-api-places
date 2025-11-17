@@ -9,8 +9,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 public record Place(
         @Id Long id,
-        @NotBlank String name,
-        String slug,
+        @NotBlank String name, String slug,
         @NotBlank String state,
         @CreatedDate LocalDateTime createdAt,
         @LastModifiedDate LocalDateTime updatedAt) {
