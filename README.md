@@ -62,6 +62,7 @@ docker run --name place-service-api -p 8080:8080  -d place-service-api:0.0.1-SNA
 ```
 
 A API poderá ser acessada em [localhost:8080](http://localhost:8080).
+O Swagger poderá ser visualizado em localhost:8080/swagger-ui.html
 
 ## API Endpoints
 
