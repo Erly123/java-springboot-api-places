@@ -9,9 +9,7 @@
  <img src="https://img.shields.io/static/v1?label=Tipo&message=Desafio&color=0A66C2&labelColor=000000" alt="Desafio" />
 </p>
 
-API para gerenciar lugares (CRUD), para pessoas desenvolvedoras backend que se candidatam para a ECHL.
-
-O projeto foi desenvolvido virtualmente em tempo real.
+API para gerenciar lugares (CRUD)
 
 ## Tecnologias
  
@@ -42,8 +40,6 @@ O projeto foi desenvolvido virtualmente em tempo real.
 ```
 java -jar place-service-api/target/place-service-api-0.0.1-SNAPSHOT.jar
 ```
-
-A API poderá ser acessada em [localhost:8080](http://localhost:8080).
 
 ### Usando Docker
 
