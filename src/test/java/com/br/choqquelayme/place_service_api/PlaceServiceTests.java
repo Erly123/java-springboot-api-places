@@ -160,4 +160,15 @@ class PlaceServiceTests {
             .jsonPath("$[0].createdAt").isNotEmpty()
             .jsonPath("$[0].updatedAt").isNotEmpty();
     }
+    @Test
+   public void testListByNameNotFound() {
+        webTestClient
+            .get()
+            .uri("/places?name=name")
+            .exchange()
+            .expectStatus().isOk()
+            .expectBody()
+            .jsonPath("$").isArray()
+            .jsonPath("$.length()").isEqualTo(0);
+  }
 }
