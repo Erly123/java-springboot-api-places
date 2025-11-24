@@ -143,5 +143,21 @@ class PlaceServiceTests {
                 .jsonPath("$[0].createdAt").isNotEmpty()
                 .jsonPath("$[0].updatedAt").isNotEmpty();
     }
-
+    
+    @Test
+    public void testListByNameSuccess() {
+        webTestClient
+            .get()
+            .uri("/places?name=%s".formatted(CENTRAL_PERK.name()))
+            .exchange()
+            .expectStatus().isOk()
+            .expectBody()
+            .jsonPath("$").isArray()
+            .jsonPath("$.length()").isEqualTo(1)
+            .jsonPath("$[0].name").isEqualTo(CENTRAL_PERK.name())
+            .jsonPath("$[0].slug").isEqualTo(CENTRAL_PERK.slug())
+            .jsonPath("$[0].state").isEqualTo(CENTRAL_PERK.state())
+            .jsonPath("$[0].createdAt").isNotEmpty()
+            .jsonPath("$[0].updatedAt").isNotEmpty();
+    }
 }
