@@ -71,8 +71,8 @@ Para fazer as requisições HTTP abaixo, foi utilizada a ferramenta [postman](ht
 ```
 http://localhost:8080/places
 {
-  "name": "Lago Titica",
-  "state": "Puno"
+  "name": "Machu Picchu",
+  "state": "Cusco"
 }
 
 Status 201 created
@@ -80,11 +80,11 @@ Content-Length: 146
 Content-Type: application/json
 
 {
-    "name":"Lago Titica",
-    "slug":"lago-titica",
-    "state":"Puno",
-    "createdAt":"2025-10-31T20:31:25.973563337",
-    "updatedAt":"2025-10-31T20:31:25.973563337"
+  "name":"Machu Picchu",
+  "slug":"machu-picchu",
+  "state":"Cusco",
+  "createdAt":"2025-11-24T15:54:22.713143",
+  "updatedAt":"2025-11-24T15:54:22.713143"
 }
 ```
 
@@ -97,23 +97,51 @@ Content-Type: application/json
 Content-Length: 134
 
 {
-    "name": "Lago Tit",
-    "slug": "lago-tit",
-    "state": "Puno",
-    "createdAt": "2025-11-17T16:54:58.004707",
-    "updatedAt": "2025-11-17T16:54:58.004707"
+  "name":"Machu Picchu",
+  "slug":"machu-picchu",
+  "state":"Cusco",
+  "createdAt":"2025-11-24T15:57:30.618235",
+  "updatedAt":"2025-11-24T15:57:30.618235"
 }
 
 ```
 
 - GET /places?name=?
 ```
-http :8080/places name==PLACE
+http://localhost:8080/places?name=Machu Picchu
+
+Status 200 Ok
+transfer-encoding: chunked
+Content-Type: application/json
+
+{
+  "name":"Machu Picchu",
+  "slug":"machu-picchu",
+  "state":"Cusco",
+  "createdAt":"2025-11-24T15:57:30.618235",
+  "updatedAt":"2025-11-24T15:57:30.618235"
+}
 
 ```
 
 - PATCH /places/{id}
 ```
-http PATCH :8080/places/1 name='New Name' state='New State'
+http://localhost:8080/places/1
+{
+  "name": "New Machu Picchu",
+  "state": "New Cusco"
+}
+
+Status 200 Ok
+Content-Type: application/json
+Content-Length: 139
+
+{
+  "name":"New Machu Picchu",
+  "slug":"new-machu-picchu",
+  "state":"New Cusco",
+  "createdAt":"2025-11-24T15:57:30.618235",
+  "updatedAt":"2025-11-24T16:01:34.484393"
+}
 
 ```
