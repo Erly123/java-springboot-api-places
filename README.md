@@ -38,7 +38,7 @@ API para gerenciar lugares (CRUD)
 ```
 - Executar:
 ```
-java -jar place-service-api/target/place-service-api-0.0.1-SNAPSHOT.jar
+java -jar target/place-service-api-0.0.1-SNAPSHOT.jar
 ```
 
 ### Usando Docker
